@@ -96,17 +96,5 @@ function run(state) {
     return;
   }
 
-  // Move forward while hugging. If drifting away (> 1.5 * margin), steer back instead of moving.
-  const d = nearestWallDistances(pos);
-  const minDist = Math.min(d.left, d.right, d.top, d.bottom);
-  if (minDist > MARGIN * 1.5) {
-    // drifted inward; nudge back to nearest wall
-    const targetHeading = determineHeading(pos);
-    const adjustDiff = deltaAngle(targetHeading, dir);
-    const turnStep = Math.max(-30, Math.min(30, adjustDiff));
-    turn(turnStep);
-    return;
-  }
-
   move(STEP);
 }
